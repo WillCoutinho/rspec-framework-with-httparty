@@ -19,3 +19,9 @@ Feature: Employees
         Given that user changes an employee info
         When this changes be sent
         Then this employee info will be changed
+
+    @fourth_scenario
+    Scenario: Delete an employee
+        Given that user wants to delete an employee
+        When this delete request is sent
+        Then this employee should be deleted

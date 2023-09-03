@@ -46,7 +46,6 @@ Given('that user changes an employee info') do
   # So due that I just get some random ID from 1 to 23 (len limit) from v1/employees
 
   @put_url = "https://dummy.restapiexample.com/api/v1/update/#{Random.new.rand(1...23)}"
-  puts @put_url
 end
 
 When('this changes be sent') do
@@ -68,4 +67,24 @@ Then('this employee info will be changed') do
   expect(@update_employee['data']['employee_name']).to eql @put_payload['employee_name']
   expect(@update_employee['data']['employee_salary']).to eql @put_payload['employee_salary']
   expect(@update_employee['data']['employee_age']).to eql @put_payload['employee_age']
+end
+
+Given('that user wants to delete an employee') do
+  # @get_employee = HTTParty.get('https://dummy.restapiexample.com/api/v1/employees',
+  # headers: { 'Content-Type': 'application/json' })
+  # The "dummy-rest-api-example" has request limit and returns 429 error.
+  # So due that I just get some random ID from 1 to 23 (len limit) from v1/employees
+
+  @delete_url = "https://dummy.restapiexample.com/api/v1/delete/#{Random.new.rand(1...23)}"
+end
+
+When('this delete request is sent') do
+  @delete_employee = HTTParty.delete(@delete_url, headers: { 'Content-Type': 'application/json' })
+end
+
+Then('this employee should be deleted') do
+  expect(@delete_employee.code).to eql 200
+  expect(@delete_employee['status']).to eql 'success'
+  expect(@delete_employee['message']).to eql 'Successfully! Record has been deleted'
+  expect(@delete_employee['data']).not_to be_nil
 end
