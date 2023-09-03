@@ -2,3 +2,4 @@
 .vscode
 .ruby-lsp
 package*
+*.yml

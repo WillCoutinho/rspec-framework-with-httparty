@@ -13,3 +13,9 @@ Feature: Employees
         Given that user wants to register a new employee
         When the employee information be sent
         Then this employee should be register 
+
+    @third_scenario
+    Scenario: Update employee information
+        Given that user changes an employee info
+        When this changes be sent
+        Then this employee info will be changed
